@@ -158,17 +158,3 @@ ACCESS_TOKEN_EXPIRE_MINUTES=30
 REDIS_HOST=localhost
 REDIS_PORT=6379
 ```
-
----
-
-## Running Tests
-
-```bash
-pytest
-```
-
----
-
-## License
-
-MIT
