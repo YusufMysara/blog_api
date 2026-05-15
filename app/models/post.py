@@ -21,6 +21,5 @@ class Post(Base):
 
     tags = relationship("Tag", secondary=post_tags, back_populates="posts")
 
-
     def __repr__(self):
         return f"<Post {self.title}>"

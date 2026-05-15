@@ -32,7 +32,7 @@ class PostResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
     owner_id: int
-    author: UserResponse
+    author: UserResponse | None = None
 
     class Config:
         from_attributes = True

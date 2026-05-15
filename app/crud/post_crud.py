@@ -8,12 +8,21 @@ from app.schemas.post import PostCreate, PostUpdate
 
 
 async def get_by_id(db: AsyncSession, post_id: int) -> Post | None:
-    result = await db.execute(select(Post).options(joinedload(Post.author)).where(Post.id == post_id))
-    return result.scalars().first()
+    result = await db.execute(
+        select(Post)
+        .options(joinedload(Post.author))
+        .where(Post.id == post_id)
+    )
+    return result.unique().scalars().first()
 
 
 async def get_all(db: AsyncSession, skip: int = 0, limit: int = 10) -> Sequence[Post]:
-    result = await db.execute(select(Post).offset(skip).limit(limit))
+    result = await db.execute(
+        select(Post)
+        .options(joinedload(Post.author))
+        .offset(skip)
+        .limit(limit)
+    )
     return result.scalars().all()
 
 

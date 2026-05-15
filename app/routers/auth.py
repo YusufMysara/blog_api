@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
+from app.dependencies.rate_limit import login_rate_limit
 from app.schemas.user import UserCreate, UserLogin, UserResponse
 from app.services import auth_service
 
@@ -17,7 +18,7 @@ async def register(data: UserCreate, db: AsyncSession = Depends(get_db)):
 
 
 @router.post("/login")
-async def login(data: UserLogin, db: AsyncSession = Depends(get_db)):
+async def login(data: UserLogin, db: AsyncSession = Depends(get_db), _: None = Depends(login_rate_limit)):
     try:
         return await auth_service.login(db, data)
     except ValueError as e:
