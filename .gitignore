@@ -1,4 +1,16 @@
+# Environment
 .env
-venv/
+
+# Python
 __pycache__/
 *.pyc
+.pytest_cache/
+.coverage
+
+# Virtual environments
+venv/
+.venv/
+
+# Editors
+.idea/
+.vscode/

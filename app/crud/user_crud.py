@@ -21,8 +21,6 @@ async def get_all(db: AsyncSession, skip: int = 0, limit: int = 10) -> list[User
 
 
 async def create(db: AsyncSession, data: UserCreate) -> User:
-    print(f"Password being hashed: {data.password}")
-    print(f"Password length: {len(data.password)}")
     user = User(
         name=data.name,
         email=data.email,

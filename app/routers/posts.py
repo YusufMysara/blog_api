@@ -36,7 +36,12 @@ async def update(post_id: int, data: PostUpdate, current_user: User = Depends(ge
     try:
         return await post_service.update(db, post_id, data, current_user.id)
     except ValueError as e:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+        error_message = str(e)
+        if "Not Found" in error_message:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=error_message)
+        if "Not Authorized" in error_message:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=error_message)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error_message)
 
 
 @router.delete("/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
