@@ -154,6 +154,14 @@ The tests refuse to run unless the database name ends in `_test`, so they can ne
 
 ---
 
+## Screenshots
+
+The endpoints in the interactive docs (`/docs`); the lock icon marks routes that need a token:
+
+![API endpoints](docs/screenshots/api-endpoints.png)
+
+---
+
 ## Architecture
 
 This project follows a strict layered architecture:
